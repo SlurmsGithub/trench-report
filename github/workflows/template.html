@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENCH REPORT</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #0d0b09;
+  --red:     #b01c1c;
+  --red-hot: #e02020;
+  --cream:   #f2ead8;
+  --paper:   #ece3cc;
+  --tan:     #c8b99a;
+  --ink:     #1c1710;
+  --muted:   #7a6a55;
+  --rule:    #3a2e22;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Courier Prime', monospace;
+  font-size: 14px;
+  line-height: 1.45;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+a { color: inherit; text-decoration: none; }
+#ticker-wrap {
+  background: var(--black);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 5px 0;
+  border-bottom: 2px solid var(--red);
+}
+#ticker-inner {
+  display: inline-block;
+  animation: ticker 45s linear infinite;
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+  padding-left: 100%;
+}
+#ticker-inner span { color: var(--red); margin: 0 24px; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+#masthead {
+  background: var(--black);
+  padding: 22px 24px 16px;
+  text-align: center;
+  border-bottom: 4px solid var(--red);
+}
+#site-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  letter-spacing: 16px;
+  color: var(--cream);
+  line-height: 0.9;
+  text-shadow: 3px 3px 0px var(--red);
+}
+#mast-dateline {
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--tan);
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+#tagline-bar {
+  background: var(--red);
+  text-align: center;
+  padding: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+#banner {
+  background: var(--cream);
+  border-bottom: 3px solid var(--rule);
+  padding: 20px 30px;
+  text-align: center;
+  position: relative;
+}
+#banner::before {
+  content: '⬥ DEVELOPING ⬥';
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--red);
+  margin-bottom: 10px;
+  animation: blink 2s step-end infinite;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+#banner-hed {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 58px;
+  letter-spacing: 3px;
+  line-height: 1.0;
+  color: var(--ink);
+  display: block;
+  transition: color .15s;
+}
+#banner-hed:hover { color: var(--red); }
+#banner-src {
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#sub-banners {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  background: var(--cream);
+  border-bottom: 2px solid var(--rule);
+}
+.sub-rule { background: var(--tan); }
+.sub-banner { padding: 10px 20px; text-align: center; }
+.sub-hed {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  transition: color .15s;
+}
+.sub-hed:hover { color: var(--red); }
+.sub-src {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+  display: block;
+}
+#market-bar {
+  background: var(--black);
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 7px 20px;
+  border-top: 1px solid var(--red);
+  border-bottom: 1px solid var(--red);
+  flex-wrap: wrap;
+}
+.market-item {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  color: var(--tan);
+  letter-spacing: 1px;
+}
+.market-item .val { color: var(--cream); font-weight: 700; margin-left: 5px; }
+.up { color: #5cba5c !important; }
+.dn { color: var(--red-hot) !important; }
+#columns {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  min-height: 800px;
+}
+.col { border-right: 1px solid var(--tan); }
+.col:last-child { border-right: none; }
+.sec {
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--rule);
+  padding: 4px 10px;
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+.side-group { padding: 8px 10px 4px; border-bottom: 1px solid var(--tan); }
+.side-link {
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  padding: 3px 0;
+  color: var(--muted);
+  border-bottom: 1px dotted #d4c5a9;
+  transition: color .12s, padding-left .12s;
+}
+.side-link:last-child { border-bottom: none; }
+.side-link:hover { color: var(--red); padding-left: 5px; }
+.c-group { padding: 0 14px 10px; border-bottom: 1px solid var(--tan); }
+.c-group:last-child { border-bottom: none; }
+.c-hed {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1.2;
+  padding: 9px 0 3px;
+  border-bottom: 1px dotted var(--tan);
+  transition: color .12s;
+}
+.c-hed:hover { color: var(--red); }
+.c-hed:last-child { border-bottom: none; }
+.c-hed.big {
+  font-size: 26px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 10px;
+  margin-bottom: 2px;
+}
+.c-src {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+}
+.r-story {
+  display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12.5px;
+  line-height: 1.45;
+  padding: 6px 10px;
+  border-bottom: 1px dotted #d4c5a9;
+  transition: color .12s, background .12s;
+}
+.r-story:hover { color: var(--red); background: rgba(176,28,28,.04); }
+.r-story.fire { color: var(--red); font-weight: 700; }
+.r-story.fire::before { content: '▶ '; }
+.dev-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--cream);
+  background: var(--red);
+  padding: 1px 5px;
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: blink 2s step-end infinite;
+}
+#footer {
+  background: var(--black);
+  border-top: 4px solid var(--red);
+  text-align: center;
+  padding: 16px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+#footer .title { color: var(--cream); font-size: 20px; font-family: 'Bebas Neue'; letter-spacing: 8px; display: block; margin-bottom: 6px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--tan); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="ticker-wrap">
+  <div id="ticker-inner">
+    Breaking news loading... &nbsp;<span>★</span>&nbsp; Trench Report &nbsp;<span>★</span>&nbsp; Dispatches from the front line &nbsp;<span>★</span>&nbsp;
+  </div>
+</div>
+<div id="masthead">
+  <div id="site-title">TRENCH REPORT</div>
+  <div id="mast-dateline">
+    <span id="clock-display">--:--:-- EST</span> &nbsp;·&nbsp; {{DATELINE}} &nbsp;·&nbsp; {{UPDATED}}
+  </div>
+</div>
+<div id="tagline-bar">DISPATCHES FROM THE FRONT LINE OF NEWS &nbsp;·&nbsp; STRAIGHT &nbsp;·&nbsp; NO SPIN &nbsp;·&nbsp; NO AGENDA</div>
+<div id="banner">
+  {{BANNER_HTML}}
+</div>
+<div id="sub-banners">
+  {{SUB_BANNERS_HTML}}
+</div>
+<div id="market-bar">
+  <div class="market-item">DOW <span class="val up">▲ --</span></div>
+  <div class="market-item">S&amp;P <span class="val up">▲ --</span></div>
+  <div class="market-item">NASDAQ <span class="val up">▲ --</span></div>
+  <div class="market-item">OIL <span class="val dn">▼ --</span></div>
+  <div class="market-item">GOLD <span class="val up">▲ --</span></div>
+  <div class="market-item">10Y <span class="val dn">▼ --</span></div>
+</div>
+<div id="columns">
+  <div class="col">
+    <span class="sec">Sources</span>
+    <div class="side-group">
+      <a class="side-link" href="https://wsj.com">Wall Street Journal</a>
+      <a class="side-link" href="https://nypost.com">New York Post</a>
+      <a class="side-link" href="https://washingtonexaminer.com">Washington Examiner</a>
+      <a class="side-link" href="https://thehill.com">The Hill</a>
+      <a class="side-link" href="https://realclearpolitics.com">RealClearPolitics</a>
+      <a class="side-link" href="https://nationalreview.com">National Review</a>
+      <a class="side-link" href="https://thefp.com">The Free Press</a>
+      <a class="side-link" href="https://axios.com">Axios</a>
+      <a class="side-link" href="https://reuters.com">Reuters</a>
+      <a class="side-link" href="https://apnews.com">AP Wire</a>
+      <a class="side-link" href="https://bloomberg.com">Bloomberg</a>
+      <a class="side-link" href="https://foxnews.com">Fox News</a>
+      <a class="side-link" href="https://justthenews.com">Just The News</a>
+      <a class="side-link" href="https://washingtontimes.com">Washington Times</a>
+    </div>
+    <span class="sec">Columnists</span>
+    <div class="side-group">
+      <a class="side-link" href="https://thefp.com">Bari Weiss</a>
+      <a class="side-link" href="https://wsj.com">Peggy Noonan</a>
+      <a class="side-link" href="https://victorhanson.com">Victor Davis Hanson</a>
+      <a class="side-link" href="https://wsj.com">Holman Jenkins Jr.</a>
+      <a class="side-link" href="https://nationalreview.com">Rich Lowry</a>
+      <a class="side-link" href="https://taibbi.substack.com">Matt Taibbi</a>
+    </div>
+    <span class="sec">Radio</span>
+    <div class="side-group">
+      <a class="side-link" href="https://marklevinshow.com">Mark Levin</a>
+      <a class="side-link" href="https://bongino.com">Dan Bongino</a>
+      <a class="side-link" href="https://npr.org/politics">NPR Politics</a>
+    </div>
+  </div>
+  <div class="col">
+    {{CENTER_HTML}}
+  </div>
+  <div class="col">
+    {{RAIL_HTML}}
+  </div>
+</div>
+<div id="footer">
+  <span class="title">TRENCH REPORT</span>
+  &copy; 2026 &nbsp;·&nbsp; Dispatches updated every 4 hours &nbsp;·&nbsp; All sources linked and attributed
+</div>
+<script>
+  function tick() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    document.getElementById('clock-display').textContent =
+      pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' EST';
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
